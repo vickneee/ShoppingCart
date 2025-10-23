@@ -23,7 +23,7 @@
     </dependencies>
 
     <build>
-        <finalName>ShoppingCart</finalName>
+        <finalName>shopping_cart</finalName>
         <plugins>
 
             <!-- Compiler plugin -->
