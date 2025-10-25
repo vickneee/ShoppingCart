@@ -3,7 +3,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.text.NumberFormat;
 
-
 public class ShoppingCart {
 
     public static void main(String[] args) {
@@ -31,8 +30,8 @@ public class ShoppingCart {
     }
 
     private static Locale getLocale(int choice) {
-
         Locale locale;
+
         switch (choice) {
             case 1 -> locale = new Locale("en", "US");
             case 2 -> locale = new Locale("fi", "FI");
@@ -44,7 +43,6 @@ public class ShoppingCart {
     }
 
     private static double getTotalPrice(ResourceBundle messages, Scanner scanner) {
-
         double totalPrice = 0.0;
 
         System.out.println(messages.getString("number_of_items"));
