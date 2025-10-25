@@ -1,7 +1,8 @@
-import java.text.NumberFormat;
+import java.util.Scanner;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.text.NumberFormat;
+
 
 public class ShoppingCart {
 
@@ -9,9 +10,7 @@ public class ShoppingCart {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Select a language: \n1 = English \n2 = Finnish \n3 = Swedish \n4 = Japanese \n");
-
-        int choice = scanner.nextInt();
+        int choice = getChoice(scanner);
 
         Locale locale = getLocale(choice);
 
@@ -20,12 +19,32 @@ public class ShoppingCart {
 
         double totalPrice = getTotalPrice(messages, scanner);
 
-        System.out.println(messages.getString("total_cost") + " " + currency.format(totalPrice));
+        printResult(messages, currency, totalPrice);
 
         scanner.close();
     }
 
+    private static int getChoice(Scanner scanner) {
+        System.out.println("Select a language: \n1 = English \n2 = Finnish \n3 = Swedish \n4 = Japanese \n");
+
+        return scanner.nextInt();
+    }
+
+    private static Locale getLocale(int choice) {
+
+        Locale locale;
+        switch (choice) {
+            case 1 -> locale = new Locale("en", "US");
+            case 2 -> locale = new Locale("fi", "FI");
+            case 3 -> locale = new Locale("sv", "SE");
+            case 4 -> locale = new Locale("ja", "JP");
+            default -> locale = new Locale("en", "US");
+        }
+        return locale;
+    }
+
     private static double getTotalPrice(ResourceBundle messages, Scanner scanner) {
+
         double totalPrice = 0.0;
 
         System.out.println(messages.getString("number_of_items"));
@@ -44,16 +63,7 @@ public class ShoppingCart {
         return totalPrice;
     }
 
-    private static Locale getLocale(int choice) {
-
-        Locale locale;
-        switch (choice) {
-            case 1 -> locale = new Locale("en", "US");
-            case 2 -> locale = new Locale("fi", "FI");
-            case 3 -> locale = new Locale("sv", "SE");
-            case 4 -> locale = new Locale("ja", "JP");
-            default -> locale = new Locale("en", "US");
-        }
-        return locale;
+    private static void printResult(ResourceBundle messages, NumberFormat currency, double totalPrice) {
+        System.out.println(messages.getString("total_cost") + " " + currency.format(totalPrice));
     }
 }
