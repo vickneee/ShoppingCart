@@ -41,8 +41,8 @@ public class ShoppingCart {
             totalPrice += price * quantity;
         }
 
-        System.out.println(messages.getString("total_cost") + " " +
-                currency.format(totalPrice));
+        System.out.println(messages.getString("total_cost") + " " + currency.format(totalPrice));
 
+        scanner.close();
     }
 }
