@@ -13,18 +13,19 @@ public class ShoppingCart {
 
         int choice = scanner.nextInt();
 
-        Locale locale;
-        switch (choice) {
-            case 1 -> locale = new Locale("en", "US");
-            case 2 -> locale = new Locale("fi", "FI");
-            case 3 -> locale = new Locale("sv", "SE");
-            case 4 -> locale = new Locale("ja", "JP");
-            default -> locale = new Locale("en", "US");
-        }
+        Locale locale = getLocale(choice);
 
         ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", locale);
         NumberFormat currency = NumberFormat.getCurrencyInstance(locale);
 
+        double totalPrice = getTotalPrice(messages, scanner);
+
+        System.out.println(messages.getString("total_cost") + " " + currency.format(totalPrice));
+
+        scanner.close();
+    }
+
+    private static double getTotalPrice(ResourceBundle messages, Scanner scanner) {
         double totalPrice = 0.0;
 
         System.out.println(messages.getString("number_of_items"));
@@ -40,9 +41,19 @@ public class ShoppingCart {
 
             totalPrice += price * quantity;
         }
+        return totalPrice;
+    }
 
-        System.out.println(messages.getString("total_cost") + " " + currency.format(totalPrice));
+    private static Locale getLocale(int choice) {
 
-        scanner.close();
+        Locale locale;
+        switch (choice) {
+            case 1 -> locale = new Locale("en", "US");
+            case 2 -> locale = new Locale("fi", "FI");
+            case 3 -> locale = new Locale("sv", "SE");
+            case 4 -> locale = new Locale("ja", "JP");
+            default -> locale = new Locale("en", "US");
+        }
+        return locale;
     }
 }
