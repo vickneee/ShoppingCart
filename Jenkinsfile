@@ -6,7 +6,7 @@ pipeline{
             PATH = "/usr/local/bin:${env.PATH}"
 
             // Define Docker Hub credentials ID
-            DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
+            // DOCKERHUB_CREDENTIALS_ID = 'Docker_Hub'
             // Define Docker Hub repository name
             DOCKERHUB_REPO = 'vickneee/shopping_cart'
             // Define Docker image tag
@@ -76,7 +76,7 @@ pipeline{
         // Create repo in Docker Hub to push it (Run Dockerfile)
         stage('Push Docker Image to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: "${Docker_Hub}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         docker login -u $DOCKER_USER -p $DOCKER_PASS
                         docker push $DOCKERHUB_REPO:$DOCKER_IMAGE_TAG
